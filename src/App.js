@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {ThemeProvider} from '@mui/material';
+import {Route, Routes} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import theme from './themes/theme';
+
+import Layout from "./components/Layout/Layout";
+import HomePage from "./components/HomePage/HomePage";
+import AboutUs from "./components/AboutUs/AboutUs";
+import News from "./components/News/News";
+import Form from "./components/Form";
+import Contacts from "./components/Contacts/Contacts";
+import Login from "./components/Login/Login";
+
+const App = () => {
+    return (
+        <ThemeProvider theme={theme}>
+            <Routes>
+                <Route path={'/'} element={<Layout/>}>
+                    <Route index path={'/'} element={<HomePage/>}/>
+                    <Route path={'/about'} element={<AboutUs/>}/>
+                    <Route path={'/news'} element={<News/>}/>
+                    <Route path={'/form'} element={<Form/>}/>
+                    <Route path={'/contacts'} element={<Contacts/>}/>
+                    <Route path={'/login'} element={<Login/>}/>
+                </Route>
+            </Routes>
+        </ThemeProvider>
+    );
+};
 
 export default App;
