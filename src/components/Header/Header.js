@@ -1,82 +1,90 @@
 import React from 'react';
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
+import {useDispatch, useSelector} from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
 
 import './Header.css';
 import logo from '../../images/h2.webp';
-import {useDispatch, useSelector} from "react-redux";
-import {setOpenMenu} from "../../store/theme.slice";
+import {scrollNav, setOpenMenu} from "../../store/theme.slice";
 
 
-//TODO make burger resposive menu
+//TODO center items in responsive menu
 
 const Header = () => {
-    const isAuth = true;
+    // const isAuth = true;
     const dispatch = useDispatch();
-    const {openMenu} = useSelector(state => state.themeStore);
-    // const [openMenu, setOpenMenu] = useState(false);
-    // console.log(openMenu);
+    const {openMenu, scrollMenu} = useSelector(state => state.themeStore);
 
-    function handleMenuButton() {
+    const handleMenuButton = () => {
         dispatch(setOpenMenu());
     }
+
+    const changeNavBack = () => {
+        if (window.scrollY > 100) {
+            dispatch(scrollNav(true));
+        } else dispatch(scrollNav(false))
+    }
+
+    window.addEventListener('scroll', changeNavBack);
+
     return (
-        <div className={'navbar'}>
+        <div className={scrollMenu ? 'navbar navbar_scroll' : 'navbar'}>
             <div>
-                <img src={logo} alt="logo" width={'120px'}/>
+                <img src={logo} alt="logo" className={scrollMenu ? 'logo_scroll' : 'logo'}/>
             </div>
-            <div className={openMenu ? 'menu_wrapper' + ' ' + 'show_element1' : 'menu_wrapper'}>
-                <div>
+            <ul className={openMenu ? 'menu' + ' ' + 'show_element1' : 'menu'}>
+                <li>
                     <NavLink className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
                              to={'/'}>главная
                     </NavLink>
-                </div>
-                <div>
+                </li>
+                <li>
                     <NavLink to={'/news'}
                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >новости</NavLink>
-                </div>
-                <div>
+                </li>
+                <li>
                     <NavLink to={'/about'}
                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >о нас</NavLink>
-                </div>
-                <div>
+                </li>
+                <li>
                     <NavLink to={'/form'}
                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >анкета</NavLink>
-                </div>
-
-                <div>
+                </li>
+                <li>
                     <NavLink to={'/contacts'}
                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >контакты</NavLink>
+                </li>
+                {/*<li className={isAuth ? '' : 'hide_element'}><Link to={'#'}*/}
+                {/*                                                   className={'link' + ' ' + 'add_row'}>студенту*/}
+                {/*</Link>*/}
+                {/*    <ul>*/}
+                {/*        <li><NavLink to={'/notes'}>конспекты</NavLink></li>*/}
+                {/*        <li><NavLink to={'forstudent/schedule'}>расписание</NavLink></li>*/}
+                {/*        <li><NavLink to={'/homework'}>дз</NavLink></li>*/}
+                {/*        <li><NavLink to={'/marks'}>оценки</NavLink></li>*/}
+                {/*    </ul>*/}
+                {/*</li>*/}
+                <li><NavLink to={'/login'} style={{position: 'relative'}}
+                             className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}>
+                    {/*<PersonRoundedIcon/>*/}
+                    вход
+                </NavLink>
+                </li>
+            </ul>
+            <div>
+                <div className={'menu_button'} style={{position: 'absolute', top: '25px', right: '25px'}}
+                     onClick={handleMenuButton}>
+                    <MenuIcon fontSize={'large'} style={{display: !openMenu ? "block" : "none"}}/>
                 </div>
-                <div className={isAuth ? 'menu' : 'menu' + ' ' + 'hide_element'}>
-                    <ul>
-                        <li><Link to={'#'}
-                                     className={'link' + ' ' + 'add_row'}>студенту
-                        </Link>
-                            <ul>
-                                <li><NavLink to={'/notes'}>конспекты</NavLink></li>
-                                <li><NavLink to={'/schedule'}>расписание</NavLink></li>
-                                <li><NavLink to={'/homework'}>дз</NavLink></li>
-                                <li><NavLink to={'/marks'}>оценки</NavLink></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <div className={'menu_button'} style={{position: 'absolute', top: '25px', right: '25px'}}
+                     onClick={handleMenuButton}>
+                    <CloseIcon fontSize={'large'} style={{display: openMenu ? 'block' : 'none'}}/>
                 </div>
-                <div><NavLink to={'/login'}
-                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}>login</NavLink>
-                </div>
-            </div>
-            <div className={'menu_button'} style={{position: 'absolute', top: '30px', right: '30px'}}
-                 onClick={handleMenuButton}>
-                <MenuIcon fontSize={'large'} style={{display: !openMenu ? "block" : "none"}}/>
-            </div>
-            <div className={'menu_button'} style={{position: 'absolute', top: '30px', right: '30px'}} onClick={handleMenuButton}>
-                <CloseIcon fontSize={'large'} style={{display: openMenu ? 'block' : 'none'}}/>
             </div>
         </div>);
 };

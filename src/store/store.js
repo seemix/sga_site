@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import themeStore from "./theme.slice";
+import newsStore from "./news.slice";
 
 const store = configureStore({
     reducer: {
-        themeStore
+        themeStore,
+        newsStore
     }
 });
 

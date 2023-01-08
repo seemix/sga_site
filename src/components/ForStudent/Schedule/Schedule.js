@@ -1,14 +1,13 @@
 import React from 'react';
 
-const HomePage = () => {
+const Schedule = () => {
     return (
         <div>
-            {/*<Menu/>*/}
             <h2>
-                Main page
+                Schedule
             </h2>
         </div>
     );
 };
 
-export default HomePage;
+export default Schedule;

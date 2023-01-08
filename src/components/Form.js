@@ -13,8 +13,8 @@ const Form = () => {
             <div className={css.page_container}>
                 <h2>Анкета абитуриента</h2>
                 <form onSubmit={handleSubmit((data) => console.log(data))}>
-                <Grid container spacing={8}  paddingX={10} paddingY={2}>
-                    <Grid item xs={12} sm={4}>
+                <Grid container spacing={6}  paddingX={8} paddingY={2}>
+                    <Grid item xs={12} sm={3}>
                         <TextField
                             label={'Фамилия'}
                             variant={'standard'}
@@ -30,7 +30,7 @@ const Form = () => {
                             helperText={errors?.surname ? errors.surname.message : null}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={3}>
                         <TextField
                             label={'Имя'}
                             variant={'standard'}
@@ -46,13 +46,29 @@ const Form = () => {
                             helperText={errors?.name ? errors.name.message : null}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={3}>
                         <TextField
                             label={'Отчество'}
                             variant={'standard'}
                             fullWidth
                             autoComplete='fatherName'
                             {...register('fatherName', {
+                                required: "This field is required", pattern: {
+                                    value: '',
+                                    message: 'Неверный формат'
+                                }
+                            })}
+                            error={!!errors.fatherName}
+                            helperText={errors?.fatherName ? errors.fatherName.message : null}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <TextField
+                            label={'Название и адрес церкви'}
+                            variant={'standard'}
+                            fullWidth
+                            autoComplete='church'
+                            {...register('church', {
                                 required: "This field is required", pattern: {
                                     value: '',
                                     message: 'Неверный формат'

@@ -1,0 +1,12 @@
+.footer_bar {
+    height: 100px;
+    padding: 10px;
+    color: whitesmoke;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 48%, rgba(2, 0, 36, 1) 100%);
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 9;
+}
