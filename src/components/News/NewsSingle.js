@@ -13,12 +13,13 @@ import {getNewsById} from '../../store/news.slice'
 
 const NewsSingle = () => {
     const newsItem = useSelector(state => state.newsStore);
-    const {title, text, image, createdAt} = newsItem.single;
     const dispatch = useDispatch();
     const {id} = useParams();
     useEffect(() => {
         dispatch(getNewsById(id));
     }, [dispatch, id])
+    const {title, text, image, createdAt} = newsItem.single;
+
     return (
         <div className={css.container}>
             <div className={css.page_container}>
