@@ -12,14 +12,15 @@ import {getNewsById} from '../../store/news.slice'
 //TODO make backdrop with image
 
 const NewsSingle = () => {
-    const newsItem = useSelector(state => state.newsStore);
     const dispatch = useDispatch();
     const {id} = useParams();
+    const newsItem = useSelector(state => state.newsStore);
+
     useEffect(() => {
         dispatch(getNewsById(id));
     }, [dispatch, id])
-    const {title, text, image, createdAt} = newsItem.single;
 
+    const {title, text, image, createdAt} = newsItem.single;
     return (
         <div className={css.container}>
             <div className={css.page_container}>
@@ -27,17 +28,20 @@ const NewsSingle = () => {
                 {newsItem.status === 'loading' ? <Backdrop open={true}><CircularProgress/></Backdrop> : ''}
                 {newsItem.status === 'rejected' || newsItem.error ?
                     <Alert severity="error">Information not found! {newsItem.error}</Alert> : ''}
-                <CardMedia
+
+                {image && <CardMedia
                     component="img"
                     alt={title}
                     height="450"
                     image={image}
                     title=""
-                />
+                />}
                 <h2>{title}</h2>
                 <p className={'category_link'}>
                     <i>
-                        {createdAt.substring(0, 10).split('-').reverse().join('-').replaceAll('-', '.')}
+                        {
+                            createdAt && createdAt.substring(0, 10).split('-').reverse().join('-').replaceAll('-', '.')
+                        }
                     </i>
                 </p>
                 <p>{text}</p>

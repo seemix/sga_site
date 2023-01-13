@@ -13,16 +13,25 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import css from '../../App.module.css';
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../../store/auth.slice";
 
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.authStore);
+    // console.log(user);
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        // console.log({
+        //     email: data.get('email'),
+        //     password: data.get('password'),
+
+        // });
+        // console.log(data.get('password'));
+        const loginData = {email: data.get('email'), password: data.get('password')};
+        dispatch(login(loginData));
     };
 
     return (

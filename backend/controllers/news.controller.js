@@ -18,7 +18,7 @@ module.exports = {
             const newsById = await News.findById(req.params.id);
             res.status(200).json(newsById);
         } catch (e) {
-            next(new ApiError('User not found', 404));
+            next(new ApiError('Bad Request', 400));
         }
     },
     addNews: async (req, res, next) => {

@@ -9,11 +9,11 @@ import './Layout.css';
 const Layout = () => {
     return (
         <div className={'page_wrap'}>
-            <div><Header/></div>
-            <div><Outlet/></div>
-            <div><Footer/></div>
-            <ScrollToTop component={'↑'} style={{ backgroundColor: 'eeeeee', color: '#020024FF', fontSize: '20px'}} smooth/>
-
+            <Header/>
+            <Outlet/>
+            <Footer/>
+            <ScrollToTop component={'↑'} style={{backgroundColor: '#eeeeee', color: '#020024FF', fontSize: '20px'}}
+                         smooth/>
         </div>
 
     );

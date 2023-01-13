@@ -43,10 +43,12 @@ export const newsSlice = createSlice({
             })
             .addCase(getNewsById.pending, (state) => {
                 state.status = 'loading';
+                state.error = null;
             })
             .addCase(getNewsById.fulfilled, (state, action) => {
                 state.status = 'fulfilled';
                 state.single = action.payload;
+                state.error = null;
             })
             .addCase(getNewsById.rejected, (state) => {
                 state.status = 'rejected'

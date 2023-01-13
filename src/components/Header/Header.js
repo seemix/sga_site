@@ -86,7 +86,7 @@ const Header = () => {
                     <CloseIcon fontSize={'large'} style={{display: openMenu ? 'block' : 'none'}}/>
                 </div>
             </div>
-        </div>);
+        </div>)
 };
 
 export default Header;
