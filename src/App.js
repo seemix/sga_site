@@ -13,6 +13,7 @@ import Contacts from "./components/Contacts/Contacts";
 import Login from "./components/Login/Login";
 import Schedule from "./components/ForStudent/Schedule/Schedule";
 import NewsSingle from "./components/News/NewsSingle";
+import ProtectedRoute from "./components/ProtectedRoute";
 //import * as path from "path";
 
 const App = () => {
@@ -26,8 +27,8 @@ const App = () => {
                     <Route path={'news/:id'} element={<NewsSingle/>}/>
                     <Route path={'form'} element={<Form/>}/>
                     <Route path={'contacts'} element={<Contacts/>}/>
-                    <Route path={'forstudent'}>
-                        <Route path={'/forstudent/schedule'} element={<Schedule/>}/>
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path={'schedule'} element={<Schedule/>}/>
                     </Route>
                     <Route path={'/login'} element={<Login/>}/>
                 </Route>

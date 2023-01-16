@@ -4,10 +4,8 @@ import {authService} from "../services/auth.service";
 export const login = createAsyncThunk(
     'authSlice/login',
     async (loginData, thunkAPI) => {
-        // console.log(email);
         try {
             const response = await authService.login(loginData);
-            // await localStorage.setItem('token', response.accessToken);
             await localStorage.setItem('refreshToken', response.refreshToken);
             return response;
         } catch (e) {
@@ -42,7 +40,7 @@ export const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.auth = true;
-                state.accesstoken = action.payload.accesstoken;
+                state.accessToken = action.payload.accessToken;
                 state.user = action.payload?.user;
                 state.status = 'fulfilled';
                 state.error = null;

@@ -1,20 +1,23 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import {useDispatch, useSelector} from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
+import Avatar from '@mui/material/Avatar';
 
 import './Header.css';
 import logo from '../../images/h2.webp';
 import {scrollNav, setOpenMenu} from "../../store/theme.slice";
+import UserMenu from "./UserMenu";
 
 
 //TODO center items in responsive menu
 
 const Header = () => {
-    // const isAuth = true;
     const dispatch = useDispatch();
     const {openMenu, scrollMenu} = useSelector(state => state.themeStore);
+    const {auth, user} = useSelector(state => state.authStore);
+    console.log(auth);
 
     const handleMenuButton = () => {
         dispatch(setOpenMenu());
@@ -33,6 +36,7 @@ const Header = () => {
             <div>
                 <img src={logo} alt="logo" className={scrollMenu ? 'logo_scroll' : 'logo'}/>
             </div>
+
             <ul className={openMenu ? 'menu' + ' ' + 'show_element1' : 'menu'}>
                 <li>
                     <NavLink className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
@@ -59,23 +63,29 @@ const Header = () => {
                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >контакты</NavLink>
                 </li>
-                {/*<li className={isAuth ? '' : 'hide_element'}><Link to={'#'}*/}
-                {/*                                                   className={'link' + ' ' + 'add_row'}>студенту*/}
-                {/*</Link>*/}
+                {/*<li className={auth ? '' : 'hide_element'}>*/}
+                {/*    <Link to={'#'}*/}
+                {/*          className={'link' + ' ' + 'add_row'}>*/}
+                {/*        {user.email}*/}
+                {/*    </Link>*/}
                 {/*    <ul>*/}
                 {/*        <li><NavLink to={'/notes'}>конспекты</NavLink></li>*/}
-                {/*        <li><NavLink to={'forstudent/schedule'}>расписание</NavLink></li>*/}
+                {/*        <li><NavLink to={'/schedule'}>расписание</NavLink></li>*/}
                 {/*        <li><NavLink to={'/homework'}>дз</NavLink></li>*/}
                 {/*        <li><NavLink to={'/marks'}>оценки</NavLink></li>*/}
                 {/*    </ul>*/}
                 {/*</li>*/}
-                <li><NavLink to={'/login'} style={{position: 'relative'}}
+                <li className={!auth ? '' : 'hide_element'}>
+                    <NavLink to={'/login'} style={{position: 'relative'}}
                              className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}>
-                    {/*<PersonRoundedIcon/>*/}
-                    вход
-                </NavLink>
+                        {/*<PersonRoundedIcon/>*/}
+                        вход
+                    </NavLink>
                 </li>
             </ul>
+            <div className={openMenu ? 'hide_element' : 'show_element1'} style={{margin: 'auto 0'}}>
+                {auth ? <UserMenu/> : ''}
+            </div>
             <div>
                 <div className={'menu_button'} style={{position: 'absolute', top: '25px', right: '25px'}}
                      onClick={handleMenuButton}>

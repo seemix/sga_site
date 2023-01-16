@@ -4,6 +4,7 @@ const UserDto = require('../dtos/user.dto');
 const refreshTokenModel = require('../models/refresh-token.model');
 const userModel = require('../models/user.model');
 const {REFRESH_SECRET} = require("../configs/config");
+const apiError = require('../errors/apiError');
 
 module.exports = {
     register: async (req, res, next) => {
@@ -46,23 +47,30 @@ module.exports = {
     refresh: async (req, res, next) => {
         try {
             const refreshToken = req.body.refreshToken;
+            console.log(refreshToken);
+            if(!refreshToken) res.status(401).json('Bad token!');
             const userData = await authService.verifyToken(refreshToken, REFRESH_SECRET);
             const isTokenInDb = await refreshTokenModel.findOne({token: refreshToken});
-            // console.log(userData);
-            //  await refreshTokenModel.deleteOne({_id: isTokenInDb._id});
+
             const user = await userModel.findById(userData.userDto.id);
             console.log(user);
             const userDto = new UserDto(user._id, user.email, user.isActivated);
             const tokens = authService.generateTokenPair({userDto});
             await authService.saveRefreshTokenToDb(tokens.refreshToken, user);
             res.status(200).json({...tokens, user: userDto});
-            // res.status(200).json('ок')
+
         } catch (e) {
             next(e);
         }
     },
     //todo make logout function
     logout: async (req, res, next) => {
-
+        try {
+            const refreshToken = req.body.refreshToken;
+            const token = await refreshTokenModel.deleteOne({refreshToken});
+            res.json(token);
+        } catch (e) {
+            next(e)
+        }
     }
 }

@@ -22,12 +22,13 @@ axiosService.interceptors.response.use((config) => {
             originalRequest._isRetry = true;
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
+                if(!refreshToken) return Promise.reject(error);
                 const response = await axiosService.post('auth/refresh', {refreshToken});
                 localStorage.setItem('token', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 return axiosService.request(originalRequest);
             } catch (e) {
-                console.log(e);
+                return Promise.reject(error);
             }
         }
         throw error;
