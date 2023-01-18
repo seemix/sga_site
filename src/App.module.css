@@ -1,12 +1,8 @@
-
 .container {
     width: 100%;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    /*height: 100%;*/
-    /*align-items: flex-start;*/
-
 }
 
 h1, h2, h3, h4, h5 {
@@ -34,4 +30,5 @@ p {
     flex-direction: column;
     background-color: whitesmoke;
     padding: 30px;
+    height: 100%;
 }

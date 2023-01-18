@@ -1,24 +1,20 @@
 import React from 'react';
-import {Link, NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
-import Avatar from '@mui/material/Avatar';
 
 import './Header.css';
 import logo from '../../images/h2.webp';
-import {scrollNav, setOpenMenu} from "../../store/theme.slice";
+import { scrollNav, setOpenMenu } from "../../store/theme.slice";
 import UserMenu from "./UserMenu";
-
 
 //TODO center items in responsive menu
 
 const Header = () => {
     const dispatch = useDispatch();
-    const {openMenu, scrollMenu} = useSelector(state => state.themeStore);
-    const {auth, user} = useSelector(state => state.authStore);
-    console.log(auth);
-
+    const { openMenu, scrollMenu } = useSelector(state => state.themeStore);
+    const { auth } = useSelector(state => state.authStore);
     const handleMenuButton = () => {
         dispatch(setOpenMenu());
     }
@@ -36,64 +32,52 @@ const Header = () => {
             <div>
                 <img src={logo} alt="logo" className={scrollMenu ? 'logo_scroll' : 'logo'}/>
             </div>
-
             <ul className={openMenu ? 'menu' + ' ' + 'show_element1' : 'menu'}>
                 <li>
-                    <NavLink className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
+                    <NavLink className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
                              to={'/'}>главная
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/news'}
-                             className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >новости</NavLink>
                 </li>
                 <li>
                     <NavLink to={'/about'}
-                             className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >о нас</NavLink>
                 </li>
                 <li>
                     <NavLink to={'/form'}
-                             className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >анкета</NavLink>
                 </li>
                 <li>
                     <NavLink to={'/contacts'}
-                             className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
                     >контакты</NavLink>
                 </li>
-                {/*<li className={auth ? '' : 'hide_element'}>*/}
-                {/*    <Link to={'#'}*/}
-                {/*          className={'link' + ' ' + 'add_row'}>*/}
-                {/*        {user.email}*/}
-                {/*    </Link>*/}
-                {/*    <ul>*/}
-                {/*        <li><NavLink to={'/notes'}>конспекты</NavLink></li>*/}
-                {/*        <li><NavLink to={'/schedule'}>расписание</NavLink></li>*/}
-                {/*        <li><NavLink to={'/homework'}>дз</NavLink></li>*/}
-                {/*        <li><NavLink to={'/marks'}>оценки</NavLink></li>*/}
-                {/*    </ul>*/}
-                {/*</li>*/}
+
                 <li className={!auth ? '' : 'hide_element'}>
-                    <NavLink to={'/login'} style={{position: 'relative'}}
-                             className={({isActive}) => (isActive ? 'link' + " " + 'active' : 'link')}>
+                    <NavLink to={'/login'} style={{ position: 'relative' }}
+                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}>
                         {/*<PersonRoundedIcon/>*/}
                         вход
                     </NavLink>
                 </li>
             </ul>
-            <div className={openMenu ? 'hide_element' : 'show_element1'} style={{margin: 'auto 0'}}>
+            <div className={openMenu ? 'hide_element' : 'show_element1'} style={{ margin: 'auto 0' }}>
                 {auth ? <UserMenu/> : ''}
             </div>
             <div>
-                <div className={'menu_button'} style={{position: 'absolute', top: '25px', right: '25px'}}
+                <div className={'menu_button'} style={{ position: 'absolute', top: '25px', right: '25px' }}
                      onClick={handleMenuButton}>
-                    <MenuIcon fontSize={'large'} style={{display: !openMenu ? "block" : "none"}}/>
+                    <MenuIcon fontSize={'large'} style={{ display: !openMenu ? "block" : "none" }}/>
                 </div>
-                <div className={'menu_button'} style={{position: 'absolute', top: '25px', right: '25px'}}
+                <div className={'menu_button'} style={{ position: 'absolute', top: '25px', right: '25px' }}
                      onClick={handleMenuButton}>
-                    <CloseIcon fontSize={'large'} style={{display: openMenu ? 'block' : 'none'}}/>
+                    <CloseIcon fontSize={'large'} style={{ display: openMenu ? 'block' : 'none' }}/>
                 </div>
             </div>
         </div>)
