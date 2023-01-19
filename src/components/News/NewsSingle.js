@@ -39,15 +39,16 @@ const NewsSingle = () => {
                 {newsItem.status === 'rejected' || newsItem.error ?
                     <Alert severity="error">Information not found! {newsItem.error}</Alert> : ''}
 
-                {image && <CardMedia
-                    onClick={handleOpen}
-                    style={{ cursor: 'pointer' }}
-                    component="img"
-                    alt={title}
-                    height="350"
-                    image={image}
-                    title=""
-                />}
+                {image &&
+                    <div onClick={handleOpen}>
+                        <CardMedia
+                            style={{ cursor: 'pointer' }}
+                            component="img"
+                            alt={title}
+                            height="350"
+                            image={image}
+                            title=""
+                        /></div>}
                 <h2>{title}</h2>
                 <p className={'category_link'}>
                     {

@@ -14,8 +14,7 @@ import UserMenu from "./UserMenu";
 const Header = () => {
     const dispatch = useDispatch();
     const { openMenu, scrollMenu } = useSelector(state => state.themeStore);
-    const { auth, user } = useSelector(state => state.authStore);
-    console.log(user);
+    const { auth } = useSelector(state => state.authStore);
     const handleMenuButton = () => {
         dispatch(setOpenMenu());
     }

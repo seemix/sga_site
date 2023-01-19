@@ -7,7 +7,7 @@ module.exports = {
             const news = await News.find();
             setTimeout(() => {
                 res.json(news);
-            }, 1000);
+            }, 10);
 
         } catch (e) {
             next(e);
