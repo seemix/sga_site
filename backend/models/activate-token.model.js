@@ -1,8 +1,8 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const activateTokenSchema = new Schema({
-    token: {type: String, required: true},
-    user: {type: Schema.Types.ObjectId, ref: 'User'}
+    token: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
 
 }, {
     timestamps: true

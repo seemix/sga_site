@@ -4,12 +4,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const apiRouter = require('./routes/api.router')
-const { PORT, MONGO_URL } = require('./configs/config');
+const { PORT, MONGO_URL, FRONTEND_URL } = require('./configs/config');
 
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: FRONTEND_URL
 }));
 app.use(express.json());
 

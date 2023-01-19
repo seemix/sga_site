@@ -1,11 +1,10 @@
 import axios from 'axios';
 import baseURL from '../configs/urls';
 
-const axiosService = axios.create({baseURL, withCredentials: true});
+const axiosService = axios.create({ baseURL, withCredentials: true });
 
 axiosService.interceptors.request.use((config) => {
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-        // config.headers.Authorization = `Bearer ${accessToken}`;
+        config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
         return config;
     },
     (error) => {
@@ -22,8 +21,8 @@ axiosService.interceptors.response.use((config) => {
             originalRequest._isRetry = true;
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
-                if(!refreshToken) return Promise.reject(error);
-                const response = await axiosService.post('auth/refresh', {refreshToken});
+                if (!refreshToken) return Promise.reject(error);
+                const response = await axiosService.post('auth/refresh', { refreshToken });
                 localStorage.setItem('token', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
                 return axiosService.request(originalRequest);

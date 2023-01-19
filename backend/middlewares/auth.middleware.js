@@ -1,7 +1,6 @@
 const apiError = require('../errors/apiError');
-const {verifyToken} = require('../services/auth.service');
-const {ACCESS_SECRET} = require('../configs/config');
-
+const { verifyToken } = require('../services/auth.service');
+const { ACCESS_SECRET } = require('../configs/config');
 
 module.exports = async (req, res, next) => {
     try {

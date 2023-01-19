@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
-const {ACCESS_SECRET, REFRESH_SECRET} = require('../configs/config');
-const tokenType = require('../enums/token.type.enum');
+const { ACCESS_SECRET, REFRESH_SECRET } = require('../configs/config');
 const tokenTypes = require('../enums/token-actions.enum');
 const ApiError = require('../errors/apiError');
 const userModel = require('../models/user.model');
@@ -15,17 +14,17 @@ const {
 
 module.exports = {
     checkUserInDb: async (email) => {
-        const candidate = await userModel.findOne({email});
+        const candidate = await userModel.findOne({ email });
         if (candidate) {
             throw new ApiError(`Email ${email} is already registered!`, 400);
         }
     },
     findUserInDb: async (email) => {
-      const user = await userModel.findOne({email});
-      if(!user) {
-          throw new ApiError('Email or password is incorrect!', 400);
-      }
-      return user;
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            throw new ApiError('Email or password is incorrect!', 400);
+        }
+        return user;
     },
 
     saveUserToDb: async (email, password, activationToken) => {
@@ -49,12 +48,12 @@ module.exports = {
         let secretWord = '';
         if (actionType === tokenTypes.CONFIRM_ACCOUNT) secretWord = CONFIRM_ACCOUNT_ACTION_TOKEN_SECRET;
         else if (actionType === tokenTypes.FORGOT_PASSWORD) secretWord = FORGOT_PASSWORD_ACTION_TOKEN_SECRET;
-        return jwt.sign(dataToSign, secretWord, {expiresIn: '2d'});
+        return jwt.sign(dataToSign, secretWord, { expiresIn: '2d' });
     },
 
     generateTokenPair: (dataToSign = {}) => {
-        const accessToken = jwt.sign(dataToSign, ACCESS_SECRET, {expiresIn: '10m'});
-        const refreshToken = jwt.sign(dataToSign, REFRESH_SECRET, {expiresIn: '20d'});
+        const accessToken = jwt.sign(dataToSign, ACCESS_SECRET, { expiresIn: '10m' });
+        const refreshToken = jwt.sign(dataToSign, REFRESH_SECRET, { expiresIn: '20d' });
         return {
             accessToken,
             refreshToken
@@ -62,12 +61,11 @@ module.exports = {
     },
 
     saveRefreshTokenToDb: (refreshToken, user) => {
-        const savedToken = refreshTokenModel.create({token: refreshToken, user});
+        const savedToken = refreshTokenModel.create({ token: refreshToken, user });
         return savedToken;
     },
     saveActivationTokenToDb: (activationToken, user) => {
-        const newActivationToken = activationTokenModel.create({token: activationToken, user});
-        return newActivationToken;
+        return activationTokenModel.create({ token: activationToken, user });
     },
 
     verifyToken: (token = '', secret) => {

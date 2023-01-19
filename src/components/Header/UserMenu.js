@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from "@mui/material/Avatar";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/auth.slice";
 
 const UserMenu = () => {
+    const { user } = useSelector(state => state.authStore);
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -38,13 +43,14 @@ const UserMenu = () => {
                     <Link to={'/marks'}>
                         <MenuItem>Оценки</MenuItem>
                     </Link>
-                    <NavLink to={'/logout'}>
-                        <MenuItem>Выход</MenuItem>
-                    </NavLink>
+                        <MenuItem onClick={() => dispatch(logout(localStorage.getItem('refreshToken')))}>
+                            <LogoutIcon/>
+                            Выход
+                        </MenuItem>
                 </Menu>
             </div>
             <div style={{ marginLeft: '15px' }}>
-              <span> Welcome, Vasya</span>
+                <span> Welcome, {user.userName}</span>
             </div>
         </div>
     );

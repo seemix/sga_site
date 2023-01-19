@@ -5,7 +5,7 @@ import css from '../../App.module.css';
 const AboutUs = () => {
     return (
         <div className={css.container}>
-            <div className={css.page_container} >
+            <div className={css.page_container}>
                 <h2>
                     <SchoolOutlinedIcon/>
                     О нас
@@ -40,8 +40,10 @@ const AboutUs = () => {
                         также покрывает транспортные расходы.</p>
                 </div>
                 <div>
-                <h3>Преподаватели</h3>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias assumenda aut debitis distinctio eaque explicabo facere, laboriosam laudantium, molestias odit pariatur repellat sequi similique tempora tempore temporibus tenetur voluptatibus.
+                    <h3>Преподаватели</h3>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias assumenda aut debitis
+                    distinctio eaque explicabo facere, laboriosam laudantium, molestias odit pariatur repellat sequi
+                    similique tempora tempore temporibus tenetur voluptatibus.
 
                 </div>
             </div>
