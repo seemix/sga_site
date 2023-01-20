@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { Alert, CardMedia, Modal } from "@mui/material";
+import { Alert, Button, CardMedia, Modal } from "@mui/material";
 
 import css from "../../App.module.css";
 import './NewsSingle.css';
@@ -29,16 +29,16 @@ const NewsSingle = () => {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+                    // aria-labelledby="modal-modal-title"
+                    // aria-describedby="modal-modal-description"
                 >
                     <NewsPicture picture={image}/>
                 </Modal>
-                <p className={'category_link'}>Главная / <Link to={'../news'}>Новости</Link></p>
+                <Link to={'../news'}><Button style={{marginBottom: '15px'}}>Новости</Button></Link>
+
                 {newsItem.status === 'loading' ? <Backdrop open={true}><CircularProgress/></Backdrop> : ''}
                 {newsItem.status === 'rejected' || newsItem.error ?
                     <Alert severity="error">Information not found! {newsItem.error}</Alert> : ''}
-
                 {image &&
                     <div onClick={handleOpen}>
                         <CardMedia

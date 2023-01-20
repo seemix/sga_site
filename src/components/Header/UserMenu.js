@@ -21,7 +21,9 @@ const UserMenu = () => {
     return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
-                <Avatar style={{ backgroundColor: '#ef6723' }} onClick={handleClick}>U</Avatar>
+                <Avatar style={{ backgroundColor: '#ef6723', cursor: 'pointer' }} onClick={handleClick}>
+                    {user.userName[0]}
+                </Avatar>
                 <Menu
                     style={{ marginTop: '10px', marginLeft: '-5px', cursor: 'pointer' }}
                     id="basic-menu"
@@ -50,7 +52,7 @@ const UserMenu = () => {
                 </Menu>
             </div>
             <div style={{ marginLeft: '15px' }}>
-                <span> Welcome, {user.userName}</span>
+                <span onClick={handleClick} style={{cursor: 'pointer'}}> Welcome, {user.userName}</span>
             </div>
         </div>
     );

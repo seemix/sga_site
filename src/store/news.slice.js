@@ -1,11 +1,11 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {newsService} from '../services/news.service';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { newsService } from '../services/news.service';
 
 export const getAllNews = createAsyncThunk(
     'newsSlice/getAllNews',
-    async () => {
+    async (page) => {
         try {
-            return await newsService.getAll();
+            return await newsService.getAll(page);
         } catch (e) {
             throw new Error('error getting news');
         }
@@ -29,13 +29,17 @@ export const newsSlice = createSlice({
         news: [],
         single: {},
         status: null,
-        error: null
+        error: null,
+        pages: null,
+        page: 1
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getAllNews.fulfilled, (state, action) => {
-                state.news = action.payload;
+                state.news = action.payload.news;
+                state.pages = action.payload.pages;
+                state.page = action.payload.page;
                 state.status = 'fulfilled'
             })
             .addCase(getAllNews.pending, (state) => {

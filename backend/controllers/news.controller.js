@@ -1,13 +1,22 @@
 const News = require('../models/news.model');
-const ApiError = require("../errors/apiError");
+const ApiError = require('../errors/apiError');
+const { NEWS_ON_PAGE } = require('../configs/config');
 
 module.exports = {
     getAllNews: async (req, res, next) => {
         try {
-            const news = await News.find();
-            setTimeout(() => {
-                res.json(news);
-            }, 10);
+            const pages = Math.ceil(await News.find().count() / NEWS_ON_PAGE);
+            const { page = 1 } = req.query;
+            const news = await News.find()
+                .sort({ createdAt: -1 })
+                .limit(NEWS_ON_PAGE)
+                .skip((page - 1) * NEWS_ON_PAGE);
+
+                res.json({
+                    pages,
+                    page,
+                    news
+                });
 
         } catch (e) {
             next(e);
