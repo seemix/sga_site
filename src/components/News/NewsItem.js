@@ -1,11 +1,11 @@
 import React from 'react';
-import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
-import {Link} from "react-router-dom";
+import { Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import './NewsItem.css';
 
-const NewsItem = ({item}) => {
-    const {text, title, image, createdAt} = item;
+const NewsItem = ({ item }) => {
+    const { text, title, image, createdAt } = item;
 
     return (
         <div className={'card_wrapper'}>

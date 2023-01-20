@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Avatar from "@mui/material/Avatar";
+import Avatar from '@mui/material/Avatar';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { NavLink, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/auth.slice";
+import { NavLink, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/auth.slice';
 
 const UserMenu = () => {
     const { user } = useSelector(state => state.authStore);
@@ -45,14 +45,14 @@ const UserMenu = () => {
                     <Link to={'/marks'}>
                         <MenuItem>Оценки</MenuItem>
                     </Link>
-                        <MenuItem onClick={() => dispatch(logout(localStorage.getItem('refreshToken')))}>
-                            <LogoutIcon/>
-                            Выход
-                        </MenuItem>
+                    <MenuItem onClick={() => dispatch(logout(localStorage.getItem('refreshToken')))}>
+                        <LogoutIcon/>
+                        Выход
+                    </MenuItem>
                 </Menu>
             </div>
             <div style={{ marginLeft: '15px' }}>
-                <span onClick={handleClick} style={{cursor: 'pointer'}}> Welcome, {user.userName}</span>
+                <span onClick={handleClick} style={{ cursor: 'pointer' }}> Welcome, {user.userName}</span>
             </div>
         </div>
     );

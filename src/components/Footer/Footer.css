@@ -1,6 +1,6 @@
 .footer_bar {
-    height: 100px;
-    padding: 10px;
+    min-height: 100px;
+    padding: 30px;
     color: whitesmoke;
     background: rgb(2, 0, 36);
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 48%, rgba(2, 0, 36, 1) 100%);
@@ -9,4 +9,20 @@
     width: 100%;
     box-sizing: border-box;
     z-index: 0;
+}
+
+.footer_wrapper {
+    display: flex;
+    justify-content: center;
+    column-gap: 80px;
+}
+.footer_block {
+    max-width: 200px;
+    font-size: 14px;
+    line-height: 1.7rem;
+
+
+}
+.footer_block p {
+    color: whitesmoke;
 }

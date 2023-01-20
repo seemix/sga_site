@@ -2,15 +2,13 @@ import React, { useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
 import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { getAllNews } from "../../store/news.slice";
-import css from "../../App.module.css";
+import { getAllNews } from '../../store/news.slice';
+import css from '../../App.module.css';
 import './News.css';
-import NewsItem from "./NewsItem";
-import Container from "@mui/material/Container";
+import NewsItem from './NewsItem';
 
 const News = () => {
     const news = useSelector(state => state.newsStore);
@@ -31,7 +29,6 @@ const News = () => {
                     {news.news && news.news.map((item, index) => <NewsItem key={index} item={item}/>)}
                     <Pagination shape={'rounded'} count={news.pages || 1} onChange={handlePage}/>
                 </div>
-
             </div>
         </div>
     );

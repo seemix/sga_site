@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
 import theme from './themes/theme';
 
-import Layout from "./components/Layout/Layout";
-import HomePage from "./components/HomePage/HomePage";
-import AboutUs from "./components/AboutUs/AboutUs";
-import News from "./components/News/News";
-import Form from "./components/Form";
-import Contacts from "./components/Contacts/Contacts";
-import Login from "./components/Login/Login";
-import Schedule from "./components/ForStudent/Schedule/Schedule";
-import NewsSingle from "./components/News/NewsSingle";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Marks from "./components/ForStudent/Marks/Marks";
-import { useDispatch } from "react-redux";
-import { checkLogin } from "./store/auth.slice";
+import Layout from './components/Layout/Layout';
+import HomePage from './components/HomePage/HomePage';
+import AboutUs from './components/AboutUs/AboutUs';
+import News from './components/News/News';
+import Form from './components/Form';
+import Contacts from './components/Contacts/Contacts';
+import Login from './components/Login/Login';
+import Schedule from './components/ForStudent/Schedule/Schedule';
+import NewsSingle from './components/News/NewsSingle';
+import ProtectedRoute from './components/ProtectedRoute';
+import Marks from './components/ForStudent/Marks/Marks';
+import { useDispatch } from 'react-redux';
+import { checkLogin } from './store/auth.slice';
 
 //todo refactor auth code & make cookies?
 //todo make static components: contacts, about us
-//todo make pagination (front + back)
 //todo make frontpage with slider
 //todo make static footer
 //todo make registration verification middleware

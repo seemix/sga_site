@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authService } from "../services/auth.service";
+import { authService } from '../services/auth.service';
 
 export const login = createAsyncThunk(
     'authSlice/login',

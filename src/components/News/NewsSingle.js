@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { Alert, Button, CardMedia, Modal } from "@mui/material";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { Alert, Button, Card, CardMedia, Modal } from '@mui/material';
 
-import css from "../../App.module.css";
+import css from '../../App.module.css';
 import './NewsSingle.css';
 import { getNewsById } from '../../store/news.slice'
-import NewsPicture from "./NewsPicture";
 
 const NewsSingle = () => {
     const [open, setOpen] = useState(false);
@@ -29,26 +28,27 @@ const NewsSingle = () => {
                 <Modal
                     open={open}
                     onClose={handleClose}
-                    // aria-labelledby="modal-modal-title"
-                    // aria-describedby="modal-modal-description"
                 >
-                    <NewsPicture picture={image}/>
+                    <Card className={'modal_image'}>
+                        <img src={image} alt={'picture'} width={'100%'}/>
+                    </Card>
                 </Modal>
-                <Link to={'../news'}><Button style={{marginBottom: '15px'}}>Новости</Button></Link>
+                <Link to={'../news'}><Button style={{ marginBottom: '15px' }}>Новости</Button></Link>
 
                 {newsItem.status === 'loading' ? <Backdrop open={true}><CircularProgress/></Backdrop> : ''}
                 {newsItem.status === 'rejected' || newsItem.error ?
                     <Alert severity="error">Information not found! {newsItem.error}</Alert> : ''}
                 {image &&
-                    <div onClick={handleOpen}>
-                        <CardMedia
-                            style={{ cursor: 'pointer' }}
-                            component="img"
-                            alt={title}
-                            height="350"
-                            image={image}
-                            title=""
-                        /></div>}
+                    <CardMedia
+                        onClick={handleOpen}
+                        style={{ cursor: 'pointer' }}
+                        component="img"
+                        alt={title}
+                        height="350"
+                        image={image}
+                        title=""
+                    />
+                }
                 <h2>{title}</h2>
                 <p className={'category_link'}>
                     {

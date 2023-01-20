@@ -1,13 +1,13 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
 
 import './Header.css';
 import logo from '../../images/h2.webp';
-import { scrollNav, setOpenMenu } from "../../store/theme.slice";
-import UserMenu from "./UserMenu";
+import { scrollNav, setOpenMenu } from '../../store/theme.slice';
+import UserMenu from './UserMenu';
 
 //TODO center items in responsive menu
 
@@ -34,34 +34,34 @@ const Header = () => {
             </div>
             <ul className={openMenu ? 'menu' + ' ' + 'show_element1' : 'menu'}>
                 <li>
-                    <NavLink className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
+                    <NavLink className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}
                              to={'/'}>главная
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/news'}
-                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}
                     >новости</NavLink>
                 </li>
                 <li>
                     <NavLink to={'/about'}
-                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}
                     >о нас</NavLink>
                 </li>
                 <li>
                     <NavLink to={'/form'}
-                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}
                     >анкета</NavLink>
                 </li>
                 <li>
                     <NavLink to={'/contacts'}
-                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}
+                             className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}
                     >контакты</NavLink>
                 </li>
 
                 <li className={!auth ? '' : 'hide_element'}>
                     <NavLink to={'/login'} style={{ position: 'relative' }}
-                             className={({ isActive }) => (isActive ? 'link' + " " + 'active' : 'link')}>
+                             className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}>
                         {/*<PersonRoundedIcon/>*/}
                         вход
                     </NavLink>
@@ -73,7 +73,7 @@ const Header = () => {
             <div>
                 <div className={'menu_button'} style={{ position: 'absolute', top: '25px', right: '25px' }}
                      onClick={handleMenuButton}>
-                    <MenuIcon fontSize={'large'} style={{ display: !openMenu ? "block" : "none" }}/>
+                    <MenuIcon fontSize={'large'} style={{ display: !openMenu ? 'block' : 'none' }}/>
                 </div>
                 <div className={'menu_button'} style={{ position: 'absolute', top: '25px', right: '25px' }}
                      onClick={handleMenuButton}>
