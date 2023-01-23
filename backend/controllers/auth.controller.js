@@ -1,11 +1,11 @@
 const authService = require('../services/auth.service');
-const tokenTypes = require("../enums/token-actions.enum");
+const tokenTypes = require('../enums/token-actions.enum');
 const UserDto = require('../dtos/user.dto');
 const refreshTokenModel = require('../models/refresh-token.model');
 const userModel = require('../models/user.model');
-const { REFRESH_SECRET, ACCESS_SECRET } = require("../configs/config");
-const apiError = require("../errors/apiError");
-const { verifyToken } = require("../services/auth.service");
+const { REFRESH_SECRET, ACCESS_SECRET } = require('../configs/config');
+const apiError = require('../errors/apiError');
+const { verifyToken } = require('../services/auth.service');
 
 module.exports = {
     register: async (req, res, next) => {
@@ -55,7 +55,7 @@ module.exports = {
             const userData = await authService.verifyToken(refreshToken, REFRESH_SECRET);
             const isTokenInDb = await refreshTokenModel.findOne({ token: refreshToken });
             if (!isTokenInDb) next(new apiError('Unauthorized', 401));
-            await refreshTokenModel.deleteOne({token: refreshToken});
+            await refreshTokenModel.deleteOne({ token: refreshToken });
             const user = await userModel.findById(userData.userDto.id);
             const userDto = new UserDto(user._id, user.email, user.userName);
             const tokens = authService.generateTokenPair({ userDto });

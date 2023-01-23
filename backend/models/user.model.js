@@ -4,7 +4,7 @@ const userSchema = new Schema({
     email: { type: String, trim: true, required: true, unique: true },
     password: { type: String, required: true },
     userName: { type: String, required: true },
-   // userName: { String, trim: true, required: true },
+    group: { type: Schema.Types.ObjectId, ref: 'group' }
 }, {
     timestamps: true
 });

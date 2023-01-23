@@ -1,7 +1,8 @@
 .footer_bar {
     min-height: 100px;
+    height: 150px;
     padding: 30px;
-    color: whitesmoke;
+    color: #e1e1e1;
     background: rgb(2, 0, 36);
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 48%, rgba(2, 0, 36, 1) 100%);
     display: flex;
@@ -15,14 +16,24 @@
     display: flex;
     justify-content: center;
     column-gap: 80px;
+    flex-wrap: wrap;
 }
 .footer_block {
-    max-width: 200px;
+    min-width: 200px;
     font-size: 14px;
     line-height: 1.7rem;
-
-
+    display: flex;
+    justify-content: center;
 }
 .footer_block p {
     color: whitesmoke;
+}
+
+@media screen and (max-width: 767px) {
+    .footer_wrapper {
+        flex-direction: column;
+    }
+    .footer_bar {
+        height: auto;
+    }
 }

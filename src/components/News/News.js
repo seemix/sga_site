@@ -13,11 +13,14 @@ import NewsItem from './NewsItem';
 const News = () => {
     const news = useSelector(state => state.newsStore);
     const dispatch = useDispatch();
+    const params = { limit: '' };
     const handlePage = (event, page) => {
-        dispatch(getAllNews(page));
+        params.page = page;
+        dispatch(getAllNews(params));
     }
     useEffect(() => {
-        dispatch(getAllNews(1));
+        params.page = 1;
+        dispatch(getAllNews(params));
     }, [dispatch]);
     return (
         <div className={css.container}>

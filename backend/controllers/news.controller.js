@@ -7,16 +7,18 @@ module.exports = {
         try {
             const pages = Math.ceil(await News.find().count() / NEWS_ON_PAGE);
             const { page = 1 } = req.query;
+            let { limit } = req.query;
+            if(limit === '') limit = NEWS_ON_PAGE;
             const news = await News.find()
                 .sort({ createdAt: -1 })
-                .limit(NEWS_ON_PAGE)
+                .limit(limit)
                 .skip((page - 1) * NEWS_ON_PAGE);
 
-                res.json({
-                    pages,
-                    page,
-                    news
-                });
+            res.json({
+                pages,
+                page,
+                news
+            });
 
         } catch (e) {
             next(e);

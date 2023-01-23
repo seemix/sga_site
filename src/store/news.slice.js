@@ -3,9 +3,10 @@ import { newsService } from '../services/news.service';
 
 export const getAllNews = createAsyncThunk(
     'newsSlice/getAllNews',
-    async (page) => {
+    async (params) => {
+        console.log(params);
         try {
-            return await newsService.getAll(page);
+            return await newsService.getAll(params);
         } catch (e) {
             throw new Error('error getting news');
         }
