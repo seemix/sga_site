@@ -24,7 +24,6 @@ const HomePage = () => {
     useEffect(() => {
         dispatch(getAllNews(params));
     }, [dispatch]);
-    console.log(status);
     return (
         <>
             {status === 'loading' ? <Backdrop open={true}><CircularProgress/></Backdrop> : ''}
