@@ -1,8 +1,11 @@
 import React from 'react';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+
 import css from '../../App.module.css';
+import Teachers from '../Teachers/Teachers';
 
 const AboutUs = () => {
+
     return (
         <div className={css.container}>
             <div className={css.page_container}>
@@ -20,6 +23,9 @@ const AboutUs = () => {
                         отдельных книг и посланий, Гомилетика, Герменевтика, Мировая Миссия, Детский Евангелизм, История
                         Церкви, Культы, Апологетика и многие другие. Преподают в БМШ сотрудники СЕО Великобритании.</p>
                 </div>
+                <h3>Преподаватели</h3>
+                <Teachers/>
+
                 <div>
                     <h3>Прогамма обучения</h3>
                     <p>Программа обучения в Бельцкой Миссионерской Школе построена таким образом, чтобы каждый студент
@@ -39,16 +45,10 @@ const AboutUs = () => {
                     <p>Бельцкая Миссионкрская Школа обеспечивает своих студентов жильём и питанием на время сессий, а
                         также покрывает транспортные расходы.</p>
                 </div>
-                <div>
-                    <h3>Преподаватели</h3>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias assumenda aut debitis
-                    distinctio eaque explicabo facere, laboriosam laudantium, molestias odit pariatur repellat sequi
-                    similique tempora tempore temporibus tenetur voluptatibus.
-
-                </div>
             </div>
         </div>
-    );
+
+    )
 };
 
 export default AboutUs;

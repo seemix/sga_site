@@ -10,19 +10,24 @@ import './HomePage.css';
 
 // import required modules
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
-import Slide from '../Slide/Slide';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNews } from '../../store/news.slice';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import Slide from '../Slide/Slide';
 
 const HomePage = () => {
-    const {news} = useSelector(state => state.newsStore);
+    const {news, status} = useSelector(state => state.newsStore);
     const dispatch = useDispatch();
     const params = { limit: 3 };
     useEffect(() => {
         dispatch(getAllNews(params));
     }, [dispatch]);
+    console.log(status);
     return (
         <>
+            {status === 'loading' ? <Backdrop open={true}><CircularProgress/></Backdrop> : ''}
             <Swiper
                 loop={true}
                 autoplay={{ delay: 6000 }}
@@ -35,14 +40,7 @@ const HomePage = () => {
                 modules={[Autoplay, EffectFade, Navigation, Pagination]}
                 className="mySwiper"
             >
-                {/*<SwiperSlide>*/}
-                {/*    <img style={{ position: 'relative' }}*/}
-                {/*         src="https://images.pexels.com/photos/668465/pexels-photo-668465.jpeg" alt="123"/>*/}
-                {/*</SwiperSlide>*/}
-                {/*<SwiperSlide>*/}
-                {/*    <Slide/>*/}
-                {/*</SwiperSlide>*/}
-                {news && news.map((item, index) =><SwiperSlide><Slide key={index} slide={item}/></SwiperSlide>)}
+                {news && news.map((item, index) =><SwiperSlide key={index}><Slide key={index} slide={item}/></SwiperSlide>)}
             </Swiper>
 
         </>
