@@ -64,7 +64,13 @@
     width: 50%;
     /*text-transform: uppercase;*/
     font-family: 'Inter', sans-serif;
+    /*animation: fadein 4s;*/
 }
+/*@keyframes fadein {*/
+/*    from { opacity: 0; }*/
+/*    to   { opacity: 1; }*/
+/*}*/
+
 
 @media screen and (max-width: 767px) {
     .text_excerpt {

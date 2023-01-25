@@ -5,6 +5,10 @@ import { Card } from '@mui/material';
 
 import derek from '../../images/Derek_-_Website.xl_-300x300.jpg';
 import john from '../../images/John_-_Profile.xl_-300x300.jpg';
+import clive from  '../../images/Clive_-_Website.l-300x300.jpg';
+import chris from '../../images/Chris_-_Website.l-300x300.jpg';
+import mark from  '../../images/Mark_-_Website.l-300x300.jpg';
+import wayne from '../../images/Wayne_-_Website.xl_-300x300.jpg';
 
 const Teachers = () => {
     return (
@@ -56,26 +60,26 @@ const Teachers = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         <Card>
-                            <img src={john} alt="1"/>
-                            <h5>John Birnie</h5>
+                            <img src={mark} alt="1"/>
+                            <h5>Mark Foster</h5>
                         </Card>
                     </SwiperSlide>
                     <SwiperSlide>
                         <Card>
-                            <img src={derek} alt="1"/>
-                            <h5>Derek Maxwell</h5>
+                            <img src={chris} alt="1"/>
+                            <h5>Chris</h5>
                         </Card>
                     </SwiperSlide>
                     <SwiperSlide>
                         <Card>
-                            <img src={john} alt="1"/>
-                            <h5>John Birnie</h5>
+                            <img src={wayne} alt="1"/>
+                            <h5>Wayne</h5>
                         </Card>
                     </SwiperSlide>
                     <SwiperSlide>
                         <Card>
-                            <img src={derek} alt="1"/>
-                            <h5>Derek Maxwell</h5>
+                            <img src={clive} alt="1"/>
+                            <h5>Clive Peter</h5>
                         </Card>
                     </SwiperSlide>
                 </Swiper>

@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import './HomePage.css';
 
 // import required modules
-import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
+import { Autoplay, EffectFade, Navigation, Pagination, Parallax } from 'swiper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNews } from '../../store/news.slice';
 import Backdrop from '@mui/material/Backdrop';
@@ -29,6 +29,7 @@ const HomePage = () => {
             {status === 'loading' ? <Backdrop open={true}><CircularProgress/></Backdrop> : ''}
             <Swiper
                 loop={true}
+                parallax={true}
                 autoplay={{ delay: 6000 }}
                 spaceBetween={30}
                 effect={'fade'}
@@ -36,7 +37,7 @@ const HomePage = () => {
                 pagination={{
                     clickable: true,
                 }}
-                modules={[Autoplay, EffectFade, Navigation, Pagination]}
+                modules={[Autoplay, EffectFade, Navigation, Pagination, Parallax]}
                 className="mySwiper"
             >
                 {news && news.map((item, index) =><SwiperSlide key={index}><Slide key={index} slide={item}/></SwiperSlide>)}
