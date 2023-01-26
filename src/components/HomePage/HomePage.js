@@ -33,7 +33,8 @@ const HomePage = () => {
                 autoplay={{ delay: 6000 }}
                 spaceBetween={30}
                 effect={'fade'}
-                navigation={false}
+                // crossFade={true}
+                navigation={true}
                 pagination={{
                     clickable: true,
                 }}

@@ -45,10 +45,10 @@
 
 .active:before {
     content: '';
-    width: 82%;
+    width: 100%;
     position: absolute;
-    left: 10px;
-    bottom: 0;
+    left: 0;
+    bottom: -3px;
     border-width: 0 0 1px;
     border-style: solid;
     color: whitesmoke;
@@ -61,7 +61,6 @@
 .add_row:after {
     content: "›";
     position: absolute;
-    /*color: #ED3E44;*/
     font-size: 24px;
     font-weight: bold;
     transform: rotate(90deg);
@@ -93,11 +92,12 @@
 .menu a {
     color: whitesmoke;
     text-decoration: none;
-    display: block;
+    display: inline-block;
     text-align: center;
     height: 40px;
     line-height: 40px;
     transition: all .5s;
+    position: relative;
 }
 
 .menu ul {
@@ -164,6 +164,5 @@
     .logo, .logo_scroll {
         width: 90px;
         transition: all 0.8s ease-in-out;
-        /*display: none;*/
     }
 }

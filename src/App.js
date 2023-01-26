@@ -17,11 +17,13 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Marks from './components/ForStudent/Marks/Marks';
 import { useDispatch } from 'react-redux';
 import { checkLogin } from './store/auth.slice';
+import Homework from './components/ForStudent/Homework/Homework';
+import Notes from './components/ForStudent/Notes/Notes';
 
 //todo refactor auth code & make cookies?
 //todo make static components: contacts, about us
-//todo make frontpage with slider
-//todo make static footer
+//todo make frontpage with slider+
+//todo make static footer+
 //todo make registration verification middleware
 //todo make registration component
 
@@ -43,6 +45,8 @@ const App = () => {
                     <Route element={<ProtectedRoute/>}>
                         <Route path={'schedule'} element={<Schedule/>}/>
                         <Route path={'marks'} element={<Marks/>}/>
+                        <Route path={'homework'} element={<Homework/>}/>
+                        <Route path={'notes'} element={<Notes/>}/>
                     </Route>
                     <Route path={'/login'} element={<Login/>}/>
                 </Route>
