@@ -39,8 +39,7 @@ module.exports = {
             const { email, password } = req.body;
             const user = await authService.findUserInDb(email);
             await authService.comparePasswords(password, user.password);
-            const userDto = new UserDto(user._id, user.email, user.userName);
-            //console.log(userDto);
+            const userDto = new UserDto(user._id, user.email, user.name);
             const tokens = authService.generateTokenPair({ userDto });
             await authService.saveRefreshTokenToDb(tokens.refreshToken, user);
             res.status(200).json({ ...tokens, user: userDto });
@@ -57,7 +56,7 @@ module.exports = {
             if (!isTokenInDb) next(new apiError('Unauthorized', 401));
             await refreshTokenModel.deleteOne({ token: refreshToken });
             const user = await userModel.findById(userData.userDto.id);
-            const userDto = new UserDto(user._id, user.email, user.userName);
+            const userDto = new UserDto(user._id, user.email, user.name);
             const tokens = authService.generateTokenPair({ userDto });
             await authService.saveRefreshTokenToDb(tokens.refreshToken, user);
             res.status(200).json({ ...tokens, user: userDto });

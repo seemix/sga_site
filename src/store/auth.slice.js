@@ -1,6 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authService } from '../services/auth.service';
 
+export const registerUser = createAsyncThunk(
+    'authSlice/register',
+    async (registerData, thunkAPI) => {
+        try {
+            return await authService.register(registerData);
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.message);
+        }
+    }
+);
+
 export const login = createAsyncThunk(
     'authSlice/login',
     async (loginData, thunkAPI) => {
@@ -8,17 +19,9 @@ export const login = createAsyncThunk(
             const response = await authService.login(loginData);
             await localStorage.setItem('token', response.accessToken);
             await localStorage.setItem('refreshToken', response.refreshToken);
-
             return response;
         } catch (e) {
-            const message =
-                (e.response &&
-                    e.response.data &&
-                    e.response.data.message) ||
-                e.message ||
-                e.toString();
-            // thunkAPI.dispatch(setMessage(message));
-            return thunkAPI.rejectWithValue(e);
+            return thunkAPI.rejectWithValue(e.response.data.message);
         }
     }
 );
@@ -88,6 +91,12 @@ export const authSlice = createSlice({
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');
             })
+            .addCase(registerUser.pending, state => {
+                state.auth = false;
+                state.error = null;
+                state.status = 'loading';
+            })
+
     }
 });
 

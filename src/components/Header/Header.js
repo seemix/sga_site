@@ -32,7 +32,7 @@ const Header = () => {
             <div>
                 <img src={logo} alt="logo" className={scrollMenu ? 'logo_scroll' : 'logo'}/>
             </div>
-            <ul className={openMenu ? 'menu' + ' ' + 'show_element1' : 'menu'}>
+            <ul className={openMenu ? 'menu' + ' ' + 'show_element' : 'menu'}>
                 <li>
                     <NavLink className={({ isActive }) => (isActive ? 'link' + ' ' + 'active' : 'link')}
                              to={'/'}>главная
@@ -67,7 +67,7 @@ const Header = () => {
                     </NavLink>
                 </li>
             </ul>
-            <div className={openMenu ? 'hide_element' : 'show_element1'} style={{ margin: 'auto 0' }}>
+            <div className={openMenu ? 'hide_element' : 'show_element'} style={{ margin: 'auto 0' }}>
                 {auth ? <UserMenu/> : ''}
             </div>
             <div>

@@ -2,26 +2,27 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import css from '../../App.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/auth.slice';
+import { registerUser } from '../../store/user.slice';
 import { Alert } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import registerValidator from '../../validators/register.validator';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 const Login = () => {
     const sendForm = (data) => {
-        dispatch(login(data));
+        dispatch(registerUser(data));
     }
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: joiResolver(registerValidator) });
     const dispatch = useDispatch();
-    const response = useSelector(state => state.authStore);
+    const response = useSelector(state => state.userStore);
 
     return (
         <div className={css.container}>
@@ -36,10 +37,10 @@ const Login = () => {
                         }}
                     >
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon/>
+                            <HowToRegIcon/>
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Register
                         </Typography>
                         <Box sx={{ mt: 1 }}>
                             <form onSubmit={handleSubmit((data) => sendForm(data))}>
@@ -49,12 +50,7 @@ const Login = () => {
                                     variant={'outlined'}
                                     fullWidth
                                     autoComplete="email"
-                                    {...register('email', {
-                                        required: 'This field is required', pattern: {
-                                            value: '',
-                                            message: 'Неверный формат'
-                                        }
-                                    })}
+                                    {...register('email')}
                                     error={!!errors.email}
                                     helperText={errors?.email ? errors.email.message : null}
                                 />
@@ -65,43 +61,37 @@ const Login = () => {
                                     fullWidth
                                     type={'password'}
                                     autoComplete="password"
-                                    {...register('password', {
-                                        required: 'This field is required', pattern: {
-                                            value: '',
-                                            message: 'Неверный формат'
-                                        }
-                                    })}
+                                    {...register('password')}
                                     error={!!errors.password}
                                     helperText={errors?.password ? errors.password.message : null}
                                 />
-
+                                <TextField
+                                    margin={'normal'}
+                                    label={'Confirm Password'}
+                                    variant={'outlined'}
+                                    fullWidth
+                                    type={'password'}
+                                    autoComplete="password"
+                                    {...register('confirmPassword')}
+                                     error={!!errors.confirmPassword}
+                                    helperText={errors?.confirmPassword ? errors.confirmPassword.message : null}
+                                />
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
                                 >
-                                    Sign In
+                                    Register
                                 </Button>
                             </form>
-                            <Grid container>
-                                <Grid item xs>
-                                    {/*<Link href="#" variant="body2">*/}
-                                    {/*    Forgot password?*/}
-                                    {/*</Link>*/}
-                                </Grid>
-                                <Grid item>
-                                    Don't have an account? Sign Up
 
-                                    <Link to={'/register'}> <Button variant={'text'}>Sign up</Button> </Link>
-
-                                </Grid>
-                            </Grid>
                         </Box>
                     </Box>
                 </Container>
                 {response.status === 'rejected' || response.error ?
-                    <Alert severity="error">Bad login or password! {response.error}</Alert> : ''}
+                    <Alert severity="error">Registration Error: {response.error}</Alert> : ''}
+                {response.status === 'fulfilled' ? <Navigate to={'/register/success'}/> : '' }
                 {response.auth ? <Navigate to={'/'}/> : ''}
             </div>
         </div>

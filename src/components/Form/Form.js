@@ -2,17 +2,25 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, InputAdornment, Grid, TextField, Checkbox } from '@mui/material';
 
-import { regexpEnum } from '../configs/regexp.enum';
-import css from '../App.module.css';
+import { regexpEnum } from '../../configs/regexp.enum';
+import css from '../../App.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendFormData } from '../../store/user.slice';
+import { Navigate } from 'react-router-dom';
 
 const Form = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-
+    const dispatch = useDispatch();
+    const res = useSelector(state => state.userStore);
+    const sendForm = (data) => {
+        dispatch(sendFormData(data));
+    }
     return (
         <div className={css.container}>
             <div className={css.page_container}>
+                { res.status === 'fulfilled' ? <Navigate to={'/form/success'}/> : ''}
                 <h2>Анкета абитуриента</h2>
-                <form onSubmit={handleSubmit((data) => console.log(data))}>
+                <form onSubmit={handleSubmit((data) => sendForm(data))}>
                     <Grid container spacing={6} paddingX={8} paddingY={2}>
                         <Grid item xs={12} sm={3}>
                             <TextField
@@ -110,8 +118,8 @@ const Form = () => {
                                         message: 'Неверный формат'
                                     }
                                 })}
-                                error={!!errors.fatherName}
-                                helperText={errors?.fatherName ? errors.fatherName.message : null}
+                                error={!!errors.church}
+                                helperText={errors?.church ? errors.church.message : null}
                             />
 
                         </Grid>
@@ -130,7 +138,7 @@ const Form = () => {
                                 {...register('birthDate', {
                                     required: 'Required'
                                 })}
-                                error={!!errors.fatherName}
+                                error={!!errors.birthDate}
                                 helperText={errors?.birthDate ? errors.birthDate.message : null}
                             />
                         </Grid>

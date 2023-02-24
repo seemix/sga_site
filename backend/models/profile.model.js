@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const userSchema = new Schema({
+const formSchema = new Schema({
     surname: { type: String, trim: true, required: true },
     name: { type: String, trim: true, required: true },
     fatherName: { type: String, trim: true, required: false },
@@ -18,12 +18,9 @@ const userSchema = new Schema({
     ministry: { type: String, trim: true, required: true },
     minister: { type: String, trim: true, required: true },
     password: { type: String, default: '' },
-    status: { type: String, enum: ['applicant', 'approved', 'rejected', 'graduate', 'expelled'], default: 'applicant' },
-    group: { type: Schema.Types.ObjectId, ref: 'group' }
+    status: { type: String, enum: ['applicant', 'approved', 'rejected', 'graduate', 'expelled'], default: 'applicant' }
 }, {
     timestamps: true
 });
 
-module.exports = model('user', userSchema);
-
-
+module.exports = model('profile', formSchema);

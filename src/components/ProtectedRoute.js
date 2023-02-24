@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = () => {
     const { auth } = useSelector(state => state.authStore);
-    console.log(auth);
+    // console.log(auth);
     return (
         auth ? <Outlet/> : <Navigate to={'/login'}/>
     );

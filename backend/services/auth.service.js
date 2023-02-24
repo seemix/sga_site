@@ -28,19 +28,17 @@ module.exports = {
     },
 
     saveUserToDb: async (email, password, activationToken) => {
-        const newUser = await userModel.create(email, password);
-        return newUser;
+        return userModel.create(email, password);
     },
 
     hashPassword: (password) => {
-        const hashedPassword = bcrypt.hash(password, 5);
-        return hashedPassword;
+        return bcrypt.hash(password, 5);
     },
 
     comparePasswords: async (password, hashedPassword) => {
         const isPasswordsSame = await bcrypt.compare(password, hashedPassword);
         if (!isPasswordsSame) {
-            throw new ApiError('Wrong email or password!', 400);
+            throw new ApiError('Wrong email or password!', 401);
         }
     },
 
@@ -61,8 +59,7 @@ module.exports = {
     },
 
     saveRefreshTokenToDb: (refreshToken, user) => {
-        const savedToken = refreshTokenModel.create({ token: refreshToken, user });
-        return savedToken;
+        return refreshTokenModel.create({ token: refreshToken, user });
     },
     saveActivationTokenToDb: (activationToken, user) => {
         return activationTokenModel.create({ token: activationToken, user });

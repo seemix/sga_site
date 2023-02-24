@@ -22,6 +22,7 @@ const NewsSingle = () => {
     }, [dispatch, id])
 
     const { title, text, image, createdAt } = newsItem.single;
+    // console.log(newsItem.status);
     return (
         <div className={css.container}>
             <div className={css.page_container}>

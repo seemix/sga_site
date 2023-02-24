@@ -25,9 +25,7 @@ const NewsItem = ({ item }) => {
                                 {createdAt.substring(0, 10).split('-').reverse().join('-').replaceAll('-', '.')}
                             </p>
                             <p>{text.substring(0, 100) + '...'}
-                                {/*<Button style={{textAlign: 'right', display: 'inline'}} variant={'text'}>*/}
-                                {/*    Read more*/}
-                                {/*</Button>*/}
+
                             </p>
                         </CardContent>
                     </CardActionArea>

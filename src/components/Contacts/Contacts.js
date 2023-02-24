@@ -1,5 +1,6 @@
 import React from 'react';
 import css from '../../App.module.css';
+import RegisterSuccess from '../Register/RegisterSuccess';
 
 const Contacts = () => {
     return (
@@ -12,6 +13,7 @@ const Contacts = () => {
                     consequuntur dicta dolore, doloribus, eius illum inventore iure laboriosam laborum laudantium
                     mollitia nam, quibusdam quos ratione sunt?
                 </p>
+                <RegisterSuccess/>
             </div>
         </div>
     );

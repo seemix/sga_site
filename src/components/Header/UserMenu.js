@@ -22,7 +22,7 @@ const UserMenu = () => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
                 <Avatar style={{ backgroundColor: '#ef6723', cursor: 'pointer' }} onClick={handleClick}>
-                    {user.userName[0]}
+                    {user?.name[0]}
                 </Avatar>
                 <Menu
                     style={{ marginTop: '10px', marginLeft: '-5px', cursor: 'pointer' }}
@@ -52,7 +52,7 @@ const UserMenu = () => {
                 </Menu>
             </div>
             <div style={{ marginLeft: '15px' }}>
-                <span onClick={handleClick} style={{ cursor: 'pointer' }}> Welcome, {user.userName}</span>
+                <span onClick={handleClick} style={{ cursor: 'pointer' }}> Welcome, {user?.name}</span>
             </div>
         </div>
     );
